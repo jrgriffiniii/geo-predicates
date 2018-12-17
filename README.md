@@ -20,7 +20,7 @@ yarn install
 yarn run serve
 ```
 
-_The documentation should now be available at [http://localhost:5000](http://localhost:5000)
+_The documentation should now be available at [http://localhost:5000](http://localhost:5000)_
 
 # Help
 
