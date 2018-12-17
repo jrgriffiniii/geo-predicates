@@ -56,6 +56,69 @@
     </section>
 
     <section>
+      <h2>Namespaces and Document Conventions</h2>
+      <p>The names of RDF entities -- classes, predicates, individuals -- are URIs. These are usually expressed using a compact notation where the name is written <code>prefix:localname</code>, and where the <code>prefix</code> identifies a <i>namespace URI</i>. The namespace identified by the prefix is prepended to the <code>localname</code> to obtain the full URI.</p>
+      <p>The following namespaces are used in this document:</p>
+      <table>
+	<thead>
+	  <tr>
+	    <th>Prefix</th>
+	    <th>Namespace</th>
+	    <th>Reference</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr>
+	    <td>dcterms</td>
+	    <td>http://purl.org/dc/terms/</td>
+	    <td></td>
+	  </tr>
+	  <tr>
+	    <td>ebucore</td>
+	    <td>http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#</td>
+	    <td></td>
+	  </tr>
+	  <tr>
+	    <td>geo</td>
+	    <td>http://www.opengis.net/ont/geosparql#</td>
+	    <td></td>
+	  </tr>
+	  <tr>
+	    <td>myDataSetDefinitions</td>
+	    <td>http://data.org/definitions/</td>
+	    <td>(Non-normative, used for examples only)</td>
+	  </tr>
+	  <tr>
+	    <td>myGazetteer</td>
+	    <td>http://maps.org/gazetteer/</td>
+	    <td>(Non-normative, used for examples only)</td>
+	  </tr>
+	  <tr>
+	    <td>pcdm</td>
+	    <td>http://pcdm.org/models#</td>
+	    <td></td>
+	  </tr>
+	  <tr>
+	    <td>qb</td>
+	    <td>http://purl.org/linked-data/cube#</td>
+	    <td></td>
+	  </tr>
+	  <tr>
+	    <td>schema</td>
+	    <td>http://schema.org/</td>
+	    <td></td>
+	  </tr>
+	  <tr>
+	    <td>testRepository</td>
+	    <td>http://institution.edu/repository/</td>
+	    <td>(Non-normative, used for examples only)</td>
+	  </tr>
+	</tbody>
+      </table>
+
+      <p>All RDF examples are written in Turtle syntax [<a data-cite="turtle">turtle</a>].</p>
+    </section>
+    <section>
       <h2>Domain Models</h2>
       <section>
 	<h3>Resource Types</h3>
@@ -423,7 +486,59 @@
 
       <section>
 	<h3>Example Usage</h3>
-      </section>
+
+
+	  <section>
+	    <h4>Scanned Map</h4>
+	    <div>
+	      <pre class="example">
+# Define the raster data set as an instance of schema:Map
+
+testRepository:exampleScannedMap a pcdm:Work, schema:Map ;
+  dcterms:spatial    myGazetteer:place1 ;
+  dcterms:description    "An Example Scanned Map"@en ;
+  schema:spatialCoverage    myGazetteer:place1 ;
+  ebucore:hasMimeType    "image/tiff" .
+	      </pre>
+	    </div>
+	  </section>
+
+	  <section>
+	    <h4>Collection of Scanned Maps</h4>
+	  </section>
+
+	  <section>
+	    <h4>Raster Data Set</h4>
+	    <div>
+	      <pre class="example">
+# Define the raster data set as an instance of qb:DataSet
+
+testRepository:exampleRasterDataset a pcdm:Work, schema:Dataset, qb:DataSet ;
+  dcterms:spatial    myGazetteer:place1 ;
+  dcterms:description    "An Example Raster Data Set"@en ;
+  schema:spatialCoverage    myGazetteer:place1 ;
+  # This asserts a relationship between this repository resource and a qb:DataStructureDefinition
+  qb:structure myDataSetDefinitions:dsd1 .
+	      </pre>
+	    </div>
+	  </section>
+
+	  <section>
+	    <h4>Vector Data Set</h4>
+	    <div>
+	      <pre class="example">
+		# Define the vector data set as an instance of qb:DataSet
+
+  testRepository:exampleVectorDataset a pcdm:Work, schema:Dataset, qb:DataSet ;
+    dcterms:spatial    myGazetteer:place1 ;
+		  dcterms:description    "An Example Vector Data Set"@en ;
+		  schema:spatialCoverage    myGazetteer:place1 ;
+		  # This asserts a relationship between this repository resource and a qb:DataStructureDefinition
+		  qb:structure myDataSetDefinitions:dsd2 .
+	      </pre>
+	    </div>
+	  </section>
+	</section>
     </section>
 
     <section>
