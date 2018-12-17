@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>Samvera Geo. Predicates Working Group</title>
+    <script src='//www.w3.org/Tools/respec/respec-w3c-common' async class='remove'></script>
+    <script class='remove'>
+      var respecConfig = {
+          specStatus: "unofficial",
+	  logos: [
+	      {
+		  src: 'https://wiki.duraspace.org/download/thumbnails/87459292/samvera-fall-font2-200w.png?version=1&modificationDate=1498550535816&api=v2',
+		  href: "https://samvera.org",
+		  alt: "Samvera Community",
+		  width: 200,
+		  height: 113,
+		  id: 'samvera-logo',
+	      }
+	  ],
+          editors: [
+	      {
+		  name: "John Huck",
+		  url: "https://github.com/johnhuck",
+              },
+	      {
+		  name: "Thomas Brittnacher",
+		  url: "https://github.com/tbrittnacher",
+              },
+	      {
+		  name: "Eliot Jordan",
+		  url: "https://github.com/eliotjordan",
+              },
+	      {
+		  name: "Kimberly A. Durante",
+		  url: "https://github.com/kimdurante",
+              },
+	      {
+		  name: "James R. Griffin III",
+		  url: "https://github.com/jrgriffiniii",
+              },
+	  ],
+        github: "https://github.com/samvera-labs/geo-predicates",
+      };
+    </script>
+  </head>
+  <body>
+    <h1>Samvera Community</h1>
+    <h2>Geo. Predicates Working Group</h2>
+    <section id="abstract">
+      <p>The Samvera Geospatial Predicates Working Group was chartered during June 2017 in order to determine a set of best practices and recommendations regarding the encoding of geospatial repository metadata as linked data. Samvera repositories aim to publish content descriptive metadata as linked data using the Resource Description Framework (RDF), and those participating in this working group sought out to determine precisely which RDF ontologies would be best suited for linking descriptions for geospatial repository resources.</p>
+    </section>
+    <section id="sotd">
+      <p><i>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current releases and the latest revision of these recommendations can be found on <a href="https://wiki.duraspace.org/display/samvera/Samvera+Geo+Predicates+Working+Group">the Samvera Community Wiki</a>.</i></p>
+      <p>This document was published by the Samvera Geo. Predicates Working Group as a community recommendation for RDF usage in Samvera repositories.</p>
+      <p>All interested parties are invited to provide implementation and bug reports and other comments through the Working Group's GitHub repository. These will generally be considered in the development of future releases for this document.</p>
+    </section>
+
+    <section>
+      <h2>Domain Models</h2>
+      <section>
+	<h3>Resource Types</h3>
+	<p>The Working Group has identified a number of resource types throughout chartered work, resulting in the following:</p>
+	<table class="data complex non-normative">
+	  <thead>
+	    <tr>
+	      <th>Name</th>
+	      <th>Structure</th>
+	      <th>Content Type</th>
+	      <th>Notes</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <td>Scanned Map</td>
+	      <td>Single resource</td>
+	      <td>Image</td>
+	      <td>Includes index maps</td>
+	    </tr>
+	    <tr>
+	      <td>Scanned Map Set</td>
+	      <td>Resource collection</td>
+	      <td>Image</td>
+	      <td>includes series, sets, and atlases</td>
+	    </tr>
+	    <tr>
+	      <td>Scanned Geological Cross-Section</td>
+	      <td>Resource collection</td>
+	      <td>Image</td>
+	      <td></td>
+	    </tr>
+	    <tr>
+	      <td>Aerial Photograph</td>
+	      <td>Single resource</td>
+	      <td>Image</td>
+	      <td>single image taken from an airborne platform. scanned or born-digital</td>
+	    </tr>
+	    <tr>
+	      <td>Aerial Photograph Set</td>
+	      <td>Resource collection</td>
+	      <td>Image</td>
+	      <td></td>
+	    </tr>
+	    <tr>
+	      <td>Georeferenced Scanned Map</td>
+	      <td>Single resource</td>
+	      <td>georeferenced image</td>
+	      <td>a map image aligned to a known coordinate system. Must include georeference information. The resource type encompasses georectified image</td>
+	    </tr>
+	    <tr>
+	      <td>Georeferenced Scanned Map Set</td>
+	      <td>Resource collection</td>
+	      <td>georeferenced image</td>
+	      <td>a set of map images aligned to a known coordinate system. Must include georeference information. The resource type encompasses georeferenced series, sets, and atlases.</td>
+	    </tr>
+	    <tr>
+	      <td>Georeferenced Aerial Photograph</td>
+	      <td>Single resource</td>
+	      <td>georeferenced image</td>
+	      <td>an aerial photo image aligned to a known coordinate system. Must include georeference information. The resource type encompasses georectified aerial photograph image</td>
+	    </tr>
+	    <tr>
+	      <td>Georeferenced Aerial Photograph Set</td>
+	      <td>Resource collection</td>
+	      <td>georeferenced image</td>
+	      <td>a set of aerial photo image aligned to a known coordinate system. Must include georeference information. The resource type encompasses georectified aerial photograph image set</td>
+	    </tr>
+	    <tr>
+	      <td>Remote Sensing Data Object</td>
+	      <td>Single resource</td>
+	      <td>georeferenced image or data</td>
+	      <td>a geospatial data object collected from a sensor platform (aircraft, drone, satellite, boat), with the exception of conventional aerial photography. Includes satellite imagery, multispectral data, and lidar data, bathymetric data, among others</td>
+	    </tr>
+	    <tr>
+	      <td>Remote Sensing Data Set</td>
+	      <td>Resource collection</td>
+	      <td>georeferenced image or data</td>
+	      <td>a set of geospatial data objects collected from a sensor platform (aircraft, drone, satellite, boat), with the exception of conventional aerial photography. Includes satellite imagery, multispectral data, and lidar data, bathymetric data, among others</td>
+	    </tr>
+	    <tr>
+	      <td>Vector GIS Data Object</td>
+	      <td>Single resource</td>
+	      <td>Data</td>
+	      <td>single vector layer. category includes shapefile</td>
+	    </tr>
+	    <tr>
+	      <td>Vector GIS Data Set</td>
+	      <td>Resource collection</td>
+	      <td>Data</td>
+	      <td>a collection of layers</td>
+	    </tr>
+	    <tr>
+	      <td>Raster GIS Data Object</td>
+	      <td>Single resource</td>
+	      <td>Data</td>
+	      <td>single raster file. excludes remote sensing raster GIS data</td>
+	    </tr>
+	    <tr>
+	      <td>Raster GIS Data Set</td>
+	      <td>Resource collection</td>
+	      <td>Data</td>
+	      <td>excludes remote sensing raster GIS data</td>
+	    </tr>
+	    <tr>
+	      <td>Mixed GIS Data Set</td>
+	      <td>Resource collection</td>
+	      <td>Data</td>
+	      <td>a collection of vector and raster GIS data. Excludes remote sensing raster GIS data</td>
+	    </tr>
+	  </tbody>
+	</table>
+      </section>
+
+      <section>
+	<h3>Target Attributes</h3>
+	<p></p>
+	<table class="data complex non-normative">
+	  <thead>
+	    <tr>
+	      <th>Scope</th>
+	      <th>Name</th>
+	      <th>Definition</th>
+	      <th>Representation</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <td>Geographic Extent</td>
+	      <td></td>
+	      <td>The computer-actionable description of a geographic location (point, line or area) on the surface of the Earth.  This can be used to describe the extent on the Earth represented by an object (such as the extent of a shapefile).  This can also be used to describe the extent on the Earth of a geographic location as a subject term (see geographic location definition below).</td>
+	      <td>The geographic extent can be represented as an area (bounding box or footprint), line (path) or point</td>
+	    </tr>
+	    <tr>
+	      <td>Geographic Extent</td>
+	      <td>Bounding box (rectangle)</td>
+	      <td>The geographic extent expressed in terms of the greatest extent of latitude and longitude (the farthest west, east, north, and south an object extends)</td>
+	      <td>Usually expressed in decimal degrees (computer actionable) and/or degrees minutes seconds (DMS) (human readable)</td>
+	    </tr>
+	    <tr>
+	      <td>Geographic Extent</td>
+	      <td>Polygon</td>
+	      <td>The geographic extent representing the footprint of the object expressed as a multi-sided polygon (area) of the actual area represented by the data.  The polygon may include “donut holes” within the polygon and/or may include more than one polygon.  The polygon may be a bounding box that is skewed and/or not represented using latitude and longitude.</td>
+	      <td>Usually recorded as a series of x, y coordinate pairs using decimal degrees (computer actionable).  May also be expressed as decimal numbers where the units are meters or feet if the coordinate pairs are projected.</td>
+	    </tr>
+	    <tr>
+	      <td>Geographic Extent</td>
+	      <td>Path</td>
+	      <td>The geographic extent expressed as a line representing the path along which data were collected or objects were created</td>
+	      <td>series of (2:n) coordinate pairs (nodes), usually expressed as latitude and longitude in decimal degrees from a start point to an end point.</td>
+	    </tr>
+	    <tr>
+	      <td>Geographic Extent</td>
+	      <td>Point</td>
+	      <td>The latitude and longitude coordinate pair representing a geographic extent as a point on the surface of the Earth.  The coordinate pair may represent the exact or approximate physical location or may represent the centroid of an area in which the object resides (such as a city, county, etc.)</td>
+	      <td>Usually recorded as two separate elements; latitude and longitude, each usually expressed in decimal degrees (computer actionable) and/or degrees minutes seconds (DMS) (human readable)</td>
+	    </tr>
+
+	    <tr>
+	      <td>Geographic Location</td>
+	      <td></td>
+	      <td>The human-readable place name representing an exact or approximate physical location on the surface of the Earth.  This can be used to describe the location on the Earth representing the extent of an object, a subject, or any other use of a place name.</td>
+	      <td>The geographic location can be represented by a location place name or free-text description</td>
+	    </tr>
+	    <tr>
+	      <td>Geographic Location</td>
+	      <td>Place name</td>
+	      <td>The name of a geographical location, such as a city, mountain, lake, etc.</td>
+	      <td>text string.  The name may or may not be based on a controlled vocabulary.  The name may have variations based on language, time period, source of information, etc.</td>
+	    </tr>
+	    <tr>
+	      <td>Geographic Location</td>
+	      <td>Description</td>
+	      <td>The description of a geographic location using way points or features.</td>
+	      <td>text string (free text).  Example:  “corner of 4th Street and Mason Ave.”.</td>
+	    </tr>
+
+	    <tr>
+	      <td>Scale</td>
+	      <td></td>
+	      <td>The scale of an object is the relationship between a measured distance on the object and the corresponding actual distance on the surface of the Earth.</td>
+	      <td></td>
+	    </tr>
+	    <tr>
+	      <td>Scale</td>
+	      <td>Representative fraction denominator</td>
+	      <td>The value to the right of the colon in a ratio of equal units representing the scale (i.e. 1:400,000 means that one inch on the object equals 400,000 inches on the ground, as well as one centimeter on the object equals 400,000 centimeters on the ground)</td>
+	      <td>Integer that is the denominator of a representative fraction (‘300000’ to represent 1:300,000)</td>
+	    </tr>
+	    <tr>
+	      <td>Scale</td>
+	      <td>Text</td>
+	      <td>A written statement of the scale</td>
+	      <td>A text string usually recording what is written on the object (1 inch = 100 miles, not to scale, etc.)   The text string may be the representative fraction in its entirety (‘1:300,000’) as opposed to just the denominator.</td>
+	    </tr>
+	    <tr>
+	      <td>Scale</td>
+	      <td>Qualifier</td>
+	      <td>Used to clarify the accuracy or reliability of the representative fraction or text string (approximate, inaccurate, etc.)</td>
+	      <td>Text string, could be from a controlled vocabulary</td>
+	    </tr>
+
+	    <tr>
+	      <td>Spatial Reference System</td>
+	      <td></td>
+	      <td>The spatial reference system is the mathematical construct of a geometric system used to locate objects on a three-dimensional surface (such as the Earth).</td>
+	      <td>Could be an EPSG code or could be a formal name of a projection.  Possibly expressed as a combination of projection, coordinate system, and datum.</td>
+	    </tr>
+
+	    <tr>
+	      <td>Spatial Data Representation</td>
+	      <td></td>
+	      <td>The graphical characteristics of the data in terms of display.</td>
+	      <td></td>
+	    </tr>
+	    <tr>
+	      <td>Spatial Data Representation</td>
+	      <td>Spatial Data Representation Type</td>
+	      <td>The general method used to organize and display the graphic display of the data, either through vertices and paths (vector), through grid cells (raster), or through text (geoJSON).</td>
+	      <td>Vector, Raster, geoJSON</td>
+	    </tr>
+	    <tr>
+	      <td>Spatial Data Representation</td>
+	      <td>Spatial Data Feature Type</td>
+	      <td>The type of vertices and paths used to display the data, either vertices alone (point), paths connecting a series of vertices (line), or a closed path connecting a series of vertices where the first and last point are the same and the object has an inside and an outside (polygon).</td>
+	      <td>point, line, polygon</td>
+	    </tr>
+	    <tr>
+	      <td>File Format for Geospatial Objects</td>
+	      <td></td>
+	      <td>The encoding mechanism used to store the geospatial data</td>
+	      <td>A valid file format expressed as a term (as opposed to a file extension), such as shapefile, GeoTIFF, etc.</td>
+	    </tr>
+	    <tr>
+	      <td>Flight Altitude</td>
+	      <td></td>
+	      <td>Used with remotely sensed images; the height above the ground from which the sensor (camera) is located when the data was collected (i.e. when the photo was taken).  This element does not represent a geographic location’s elevation above sea level.</td>
+	      <td>integer (usually in feet or meters), possibly with an accompanying element to indicate the units (e.g. ‘feet’, ‘meters’), or expressed as a text string with the units or a symbol of units included (e.g. 7200’)</td>
+	    </tr>
+	    <tr>
+	      <td>Raster Resolution</td>
+	      <td></td>
+	      <td>The size of a grid cell in a raster dataset as a measure of the actual distance on the surface of the Earth that is represented by one side of the cell.  This is different from the pixel resolution associated with digital images.</td>
+	      <td>Text string indicating a distance (e.g. 30 meters)</td>
+	    </tr>
+	    <tr>
+	      <td>Remote Sensing Details</td>
+	      <td></td>
+	      <td>Name or description of a remote sensing platform used to acquire a set of geospatial data.</td>
+	      <td>Text string</td>
+	    </tr>
+	  </tbody>
+	</table>
+      </section>
+    </section>
+    <section>
+      <h2>Recommendations</h2>
+
+      <section>
+	<h3>Metadata Application Profile</h3>
+
+	<table class="data complex non-normative">
+	  <thead>
+	    <tr>
+	      <th>Scope</th>
+	      <th>Name</th>
+	      <th>Ontology</th>
+	      <th>Property</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <td>Geographic Extent</td>
+	      <td>Bounding box</td>
+	      <td>Schema.org</td>
+	      <td>box</td>
+	    </tr>
+	    <tr>
+	      <td>Geographic Extent</td>
+	      <td>Polygon</td>
+	      <td>Schema.org</td>
+	      <td>polygon</td>
+	    </tr>
+	    <tr>
+	      <td>Geographic Extent</td>
+	      <td>Path</td>
+	      <td>Schema.org</td>
+	      <td>line</td>
+	    </tr>
+	    <tr>
+	      <td>Geographic Extent</td>
+	      <td>Point</td>
+	      <td>Schema.org</td>
+	      <td>geo</td>
+	    </tr>
+	    <tr>
+	      <td>Geographic Location</td>
+	      <td>Place name</td>
+	      <td>Dublin Core</td>
+	      <td>spatial</td>
+	    </tr>
+	    <tr>
+	      <td>Geographic Location</td>
+	      <td>Description</td>
+	      <td>Dublin Core</td>
+	      <td>description</td>
+	    </tr>
+	    <tr>
+	      <td>Scale</td>
+	      <td>Representative Fraction Denominator</td>
+	      <td>RDF Data Cube extensions for spatio-temporal components</td>
+	      <td>coordGranularity</td>
+	    </tr>
+	    <tr>
+	      <td>Scale</td>
+	      <td>Text</td>
+	      <td>DCAT</td>
+	      <td>description</td>
+	    </tr>
+	    <tr>
+	      <td>Spatial Reference System</td>
+	      <td></td>
+	      <td>RDF Data Cube extensions for spatio-temporal components</td>
+	      <td>crs</td>
+	    </tr>
+	    <tr>
+	      <td>Spatial Data Representation Type</td>
+	      <td></td>
+	      <td>EBU Core</td>
+	      <td>hasDataFormat</td>
+	    </tr>
+	    <tr>
+	      <td>Spatial Data Feature Type</td>
+	      <td></td>
+	      <td>Dublin Core 1.0</td>
+	      <td>type</td>
+	    </tr>
+	    <tr>
+	      <td>File Format for Geospatial Objects</td>
+	      <td></td>
+	      <td>EBU Core</td>
+	      <td>hasMimeType</td>
+	    </tr>
+	    <tr>
+	      <td>Flight Altitude</td>
+	      <td></td>
+	      <td>Schema.org</td>
+	      <td>elevation</td>
+	    </tr>
+	    <tr>
+	      <td>Raster Resolution</td>
+	      <td></td>
+	      <td>Exif Vocabulary</td>
+	      <td>resolution</td>
+	    </tr>
+	    <tr>
+	      <td>Remote Sensing Details</td>
+	      <td></td>
+	      <td>Schema.org</td>
+	      <td>measurementTechnique</td>
+	    </tr>
+	  </tbody>
+	</table>
+      </section>
+
+      <section>
+	<h3>Example Usage</h3>
+      </section>
+    </section>
+
+    <section>
+      <h2>Best Practices</h2>
+    </section>
+
+    <section>
+      <h2>Acknowledgments</h2>
+    </section>
+  </body>
+</html>
