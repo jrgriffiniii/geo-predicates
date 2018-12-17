@@ -13,6 +13,15 @@ Jump in: [![Slack Status](http://slack.samvera.org/badge.svg)](http://slack.samv
 
 [James Griffin](https://github.com/jrgriffiniii)
 
+# Building the documentation
+
+```bash
+yarn install
+yarn run serve
+```
+
+_The documentation should now be available at [http://localhost:5000](http://localhost:5000)
+
 # Help
 
 The Samvera community is here to help. Please see our [support guide](./SUPPORT.md).
